@@ -1,0 +1,100 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[]{amsthm}
+\usepackage[]{amssymb}
+\usepackage{mathtools}
+
+\setlength{\parindent}{0pt}
+
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\title{
+    \author{Rodrigo José Alva Sáenz}
+    \date{\small \today}
+}
+
+\begin{document}
+\maketitle %This command prints the title based on information entered above
+
+\newpage
+
+\section*{Ejercicio 1}
+
+Queremos codificar los símbolos alfanuméricos (28 letras y 10 cifras) en palabras de
+una cierta longitud $k$ de un alfabeto binario $\mathbb{A} = \{0; 1\}$. ¿Cuál es la mínima longitud
+necesaria para poderlo hacer?
+
+\bigskip
+
+\textbf{Resolución:}
+
+Considerando que tenemos $n=2$ dígitos posibles para representar 38 símbolos distintos (por lo menos) entre números y letras, tenemos que:
+
+\begin{center}
+    $PR_{n=2}^{k} \geq 38$
+
+    \medskip
+
+    $2^k \geq 38$
+
+    \medskip
+
+    $k_{min} = 6 / k \in \mathbb{N}$
+\end{center}
+
+Esto se puede comprobar porque si queremos representar 38 valores únicos en un conjunto de cifras entre 0 y 1 entonces estamos usando un número binario de la forma:
+
+$$000000...$$
+
+Si queremos representar por lo menos el número 38 podemos pasar este a binario:
+
+$$\log_2(38) \approx 5.2$$
+
+Por lo que necesitamos $\ceil{5.2} = 6$ bits para representar 38: $100110$
+
+\bigskip
+
+$\therefore$ La mínima longitud $k$ es 6.
+
+\section*{Ejercicio 2}
+
+¿Es suficiente con palabras de hasta 4 de longitud para representar todas las letras del
+alfabeto ordinario en lenguaje Morse (el lenguaje Morse dispone sólo de dos símbolos:
+punto y raya)?
+
+\bigskip
+
+\textbf{Resolución:}
+
+Podemos obtener el número máximo de palabras que se pueden formar con 4 palabras de 2 posibles símbolos cada caracter de la siguiente forma:
+
+$$PR^{4}_{2} = 2^4 = 16$$
+
+\bigskip
+
+Sin embargo, debemos considerar que podemos también construir palabras de 1, 2 y 3 caracteres de longitud. Al final, podemos considerar:
+
+$$\sum\limits^{4}_{k=1} PR^{k}_{2} = \sum\limits^{4}_{k=1} 2^k = 2 \cdot \dfrac{1 - 2^4}{1 - 2} = 2 (15) = 30$$
+
+\bigskip
+
+$\therefore$ Considerando que podemos armar hasta 30 ($\geq 27$) palabras diferentes con hasta 4 caracteres en Morse, la notación si es suficiente.
+
+\newpage
+
+\section*{Ejercicio 3}
+
+¿De cuántas maneras se pueden escoger tres números del 1 al 9 de manera que no salgan
+dos consecutivos?
+
+\bigskip
+
+\textbf{Resolución:}
+
+
+
+\end{document}
+
