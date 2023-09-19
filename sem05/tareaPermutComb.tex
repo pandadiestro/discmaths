@@ -19,17 +19,21 @@
 \begin{document}
 \maketitle %This command prints the title based on information entered above
 
+\newcommand{\Ejercicio}[2]{
+    \section*{Ejercicio #1}
+
+    {#2}
+
+    \bigskip
+    \textbf{Resolución:}
+    \bigskip
+}
+
 \newpage
 
-\section*{Ejercicio 1}
-
-Queremos codificar los símbolos alfanuméricos (28 letras y 10 cifras) en palabras de
-una cierta longitud $k$ de un alfabeto binario $\mathbb{A} = \{0; 1\}$. ¿Cuál es la mínima longitud
-necesaria para poderlo hacer?
-
-\bigskip
-
-\textbf{Resolución:}
+\Ejercicio{1}{
+    Queremos codificar los símbolos alfanuméricos (28 letras y 10 cifras) en palabras de una cierta longitud $k$ de un alfabeto binario $\mathbb{A} = \{0; 1\}$. ¿Cuál es la mínima longitud necesaria para poderlo hacer?
+}
 
 Considerando que tenemos $n=2$ dígitos posibles para representar 38 símbolos distintos (por lo menos) entre números y letras, tenemos que:
 
@@ -59,17 +63,11 @@ Por lo que necesitamos $\ceil{5.2} = 6$ bits para representar 38: $100110$
 
 $\therefore$ La mínima longitud $k$ es 6.
 
-\section*{Ejercicio 2}
+---
 
-¿Es suficiente con palabras de hasta 4 de longitud para representar todas las letras del
-alfabeto ordinario en lenguaje Morse (el lenguaje Morse dispone sólo de dos símbolos:
-punto y raya)?
-
-\bigskip
-
-\textbf{Resolución:}
-
-Podemos obtener el número máximo de palabras que se pueden formar con 4 palabras de 2 posibles símbolos cada caracter de la siguiente forma:
+\Ejercicio{2}{
+    ¿Es suficiente con palabras de hasta 4 de longitud para representar todas las letras del alfabeto ordinario en lenguaje Morse (el lenguaje Morse dispone sólo de dos símbolos: punto y raya)?
+}
 
 $$PR^{4}_{2} = 2^4 = 16$$
 
@@ -82,19 +80,88 @@ $$\sum\limits^{4}_{k=1} PR^{k}_{2} = \sum\limits^{4}_{k=1} 2^k = 2 \cdot \dfrac{
 \bigskip
 
 $\therefore$ Considerando que podemos armar hasta 30 ($\geq 27$) palabras diferentes con hasta 4 caracteres en Morse, la notación si es suficiente.
+---
 
 \newpage
 
-\section*{Ejercicio 3}
+\Ejercicio{3}{
+    ¿De cuántas maneras se pueden escoger tres números del 1 al 9 de manera que no salgan dos consecutivos?
+}
 
-¿De cuántas maneras se pueden escoger tres números del 1 al 9 de manera que no salgan
-dos consecutivos?
+---
 
 \bigskip
 
-\textbf{Resolución:}
+\Ejercicio{4}{
+    Las placas de matrícula tienen cuatro dígitos numéricos seguidos de dos alfabéticos. ¿Cuántos coches se pueden matricular? Una vez se han agotado, se propone que las matrículas puedan estar formadas por seis dígitos alfanuméricos (es decir, cifras del 0 al 9 o letras de la A a la Z). ¿Cuántas matrículas nuevas se pueden hacer? Una vez agotadas éstas, ¿qué estrategia proporcionaría más matrículas nuevas, hacer matrículas con 7 dígitos, o bien añadir un símbolo al alfabeto?
+}
+
+1. 4 dígitos numéricos (10 posibilidades) y 2 alfabéticos (27 posibilidades):
+
+$$\Rightarrow \quad PR^{4}_{10} \medspace PR^{2}_{27} (10^4)(27^2) = 7,290,000$$
+
+2. 6 dígitos alfanuméricos (37 posibilidades entre 0-9 y A-Z por cada caracter)
+
+$$\Rightarrow \quad PR^{6}_{37} = 37^6 = 2,565,726,409$$
+
+La diferencia entre el antiguo grupo de placas y el nuevo, que contiene elementos iguales a los del antiguo, es:
+
+$$2,565,726,409 - 7,290,000 = 2,558,436,409 \quad \text{placas nuevas}$$
+
+Ahora, si tomásemos 7 dígitos en lugar de 6 ($PR^{7}_{37}$) el resultado sería:
+
+$$PR^{7}_{37} = 37^7 = 94,931,877,133$$
+
+Y si añadieramos un símbolo más al alfabeto, pasando de 37 posibles valores alfanuméricos a 38, esto resultaría en:
+
+$$PR^{6}_{38} = 3,010,936,384$$
+
+$\therefore$ Al agregar un símbolo más a las placas (considerando el segundo caso donde se puede tomar cualquier valor alfanumérico como caracter) se tendrá la mayor cantidad de posibles placas únicas.
+
+---
+
+\bigskip
+
+\Ejercicio{5}{
+¿Cuántos números hay entre 100 y 900 que tengan las cifras diferentes? ¿Cuántos números más grandes que 6600 con todas las cifras diferentes y sin ninguna de las cifras 7, 8 ni 9?
+}
+
+1. Considerando como números: $\{x / 123 \leq x \leq 897\}$. Podemos utilizar pares de sets combinatorios para determinar el número total de posibles combinaciones dadas las restricciones, es decir:
+
+\begin{itemize}
+    \item El primer dígito puede estar entre 1 y 8: $_8C_1$
+    \item El segundo dígito puede estar entre 0 y 9 menos el primer dígito: $_9C_1$
+    \item El tercer dígito puede estar entre 0 y 9 menos los 2 primeros dígitos: $_8C_1$
+\end{itemize}
+
+Por lo que el número de combinaciones final posible es: $_8C_1 \times _9C_1 \times _8C_1 = 8 \times 9 \times 8 = 576$
+
+\bigskip
+
+2. Aplicando el mismo concepto que en (1) pero para $\{x / 6712 \leq x \leq 6543 \}$:
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\medskip
 
 \end{document}
 
