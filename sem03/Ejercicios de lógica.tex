@@ -1,0 +1,102 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[]{amsthm}
+\usepackage[]{amssymb}
+\usepackage{mathtools}
+\usepackage{multicol}
+
+\setlength{\parindent}{0pt}
+
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\title{
+    \author{Rodrigo José Alva Sáenz}
+    \date{\small \today}
+}
+
+\begin{document}
+\maketitle %This command prints the title based on information entered above
+
+\newcommand{\Ejercicio}[2]{
+    \section*{Ejercicio #1}
+
+    {#2}
+
+    \bigskip
+    \textbf{Resolución:}
+    \bigskip
+}
+
+\newcommand{\limplies}{\rightarrow}
+
+\newpage
+
+\Ejercicio{1}{
+    Se sabe que únicamente P es verdadero, ¿Qué puede afirmarse del valor de verdad de cada una de las proposiciones siguientes?:
+    \begin{multicols}{3}
+        \begin{itemize}
+            \item $P \land Q$
+            \item $R \lor P$
+            \item $R \land P$
+            \item $S \lor \lnot P$
+            \item $R \limplies P$
+            \item $P \limplies Q$
+            \item $P \limplies P \lor S$
+            \item $\lnot P \limplies Q \land R$
+            \item $S \limplies \lnot P$
+            \item $R \limplies (S \limplies P)$
+            \item $P \lor S \limplies (\lnot Q \limplies P)$
+            \item $Q \land \lnot P \limplies R \land Q$
+        \end{itemize}
+    \end{multicols}
+}
+
+Reemplazando $P$ por su valor de verdad definido ($V$), obtenemos:
+
+\begin{enumerate}
+    \item $V \land Q \equiv Q$
+    \item $R \lor V \equiv V$
+    \item $R \land V \equiv R$
+    \item $S \lor \lnot V \equiv S \lor F \equiv S$
+    \item $R \limplies V \equiv V$
+    \item $V \limplies Q \equiv Q$
+    \item $V \limplies V \lor S \equiv V \limplies (V \lor S) \equiv V \limplies V \equiv V$
+    \item $\lnot V \limplies Q \land R \equiv F \limplies (Q \land R) \equiv V$
+    \item $S \limplies \lnot V \equiv S \limplies F \equiv \lnot S$
+    \item $R \limplies (S \limplies V) \equiv R \limplies V \equiv V$
+    \item $V \lor S \limplies (\lnot Q \limplies V) \equiv V \limplies V \equiv V$
+    \item $Q \land \lnot V \limplies R \land Q \equiv (Q \land F) \limplies (R \land Q) \equiv F \limplies (R \land Q) \equiv V$
+\end{enumerate}
+
+\Ejercicio{2}{
+    Desarrollar las tablas de verdad asociadas a las siguientes
+
+    \begin{multicols}{2}
+        \begin{enumerate}
+            \item $(p \land q) \limplies (r \lor \lnot p) \land r$
+            \item $(\lnot p \limplies (q \land p)) \leftrightarrow \lnot q$
+            \item $(\lnot p \land (q \lor r)) \limplies ((p \lor r) \land q)$
+            \item $[\lnot (p \lor q) \leftrightarrow (\lnot q \land \lnot p)] \lor p$
+            \item $(q \limplies \lnot r) \land s$
+            \item $(p \land r) \lor (p \land q)$
+        \end{enumerate}
+    \end{multicols}
+}
+
+1. $(p \land q) \limplies (r \lor \lnot p) \land r$
+
+\begin{center}
+    \begin{tabular}{| c | c | c | c |}
+        \hline
+        p & q & r & $(p \land q) \limplies (r \lor \lnot p) \land r$ \\
+        \hline
+    \end{tabular}
+\end{center}
+
+2. $(\lnot p \limplies (q \land p)) \leftrightarrow \lnot q$
+
+
+\end{document}
