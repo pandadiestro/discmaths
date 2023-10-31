@@ -1,0 +1,359 @@
+\documentclass{article}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[]{amsthm}
+\usepackage[]{amssymb}
+\usepackage{mathtools}
+\usepackage{multicol}
+\usepackage{graphicx}
+\graphicspath{ {./media/} }
+
+\setlength{\parindent}{0pt}
+
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\title{
+    \textbf{\Large Universidad Nacional Mayor de San Marcos}
+
+    \textbf{\large Facultad de Ingeniería de Sistemas e Informática}
+
+    \vspace{0.7cm}
+
+    \includegraphics[scale=0.3]{./logo.png}
+
+    \vspace{0.7cm}
+
+    \text{\normalsize Matemática discreta:Técnicas de conteo y combinaciones}
+
+    \vfill
+    \textbf{\footnotesize Alumno:}
+    \text{\footnotesize Rodrigo José Alva Sáenz}
+
+    \textbf{\footnotesize Docente:}
+    \text{\footnotesize Dr. Ciro Rodríguez Rodríguez}
+
+    \date{\small \today}
+}
+
+\begin{document}
+\maketitle %This command prints the title based on information entered above
+
+\newcommand{\Ejercicio}[2]{
+    \section*{Ejercicio #1}
+
+    {#2}
+
+    \bigskip
+    \textbf{Resolución:}
+    \bigskip
+}
+
+\newpage
+
+\Ejercicio{1}{
+    Queremos codificar los símbolos alfanuméricos (28 letras y 10 cifras) en palabras de una cierta longitud $k$ de un alfabeto binario $\mathbb{A} = \{0; 1\}$. ¿Cuál es la mínima longitud necesaria para poderlo hacer?
+}
+
+Considerando que tenemos $n=2$ dígitos posibles para representar 38 símbolos distintos (por lo menos) entre números y letras, tenemos que:
+
+\begin{center}
+    $PR_{n=2}^{k} \geq 38$
+
+    \medskip
+
+    $2^k \geq 38$
+
+    \medskip
+
+    $k_{min} = 6 / k \in \mathbb{N}$
+\end{center}
+
+Esto se puede comprobar porque si queremos representar 38 valores únicos en un conjunto de cifras entre 0 y 1 entonces estamos usando un número binario de la forma:
+
+$$000000...$$
+
+Si queremos representar por lo menos el número 38 podemos pasar este a binario:
+
+$$\log_2(38) \approx 5.2$$
+
+Por lo que necesitamos $\ceil{5.2} = 6$ bits para representar 38: $100110$
+
+\bigskip
+
+$\therefore$ La mínima longitud $k$ es 6.
+
+---
+
+\Ejercicio{2}{
+    ¿Es suficiente con palabras de hasta 4 de longitud para representar todas las letras del alfabeto ordinario en lenguaje Morse (el lenguaje Morse dispone sólo de dos símbolos: punto y raya)?
+}
+
+$$PR^{4}_{2} = 2^4 = 16$$
+
+\bigskip
+
+Sin embargo, debemos considerar que podemos también construir palabras de 1, 2 y 3 caracteres de longitud. Al final, podemos considerar:
+
+$$\sum\limits^{4}_{k=1} PR^{k}_{2} = \sum\limits^{4}_{k=1} 2^k = 2 \cdot \dfrac{1 - 2^4}{1 - 2} = 2 (15) = 30$$
+
+\bigskip
+
+$\therefore$ Considerando que podemos armar hasta 30 ($\geq 27$) palabras diferentes con hasta 4 caracteres en Morse, la notación si es suficiente.
+---
+
+\newpage
+
+\Ejercicio{3}{
+    ¿De cuántas maneras se pueden escoger tres números del 1 al 9 de manera que no salgan dos consecutivos?
+}
+
+Para este ejercicio podemos partir de la totalidad de posibles casos y luego restar los que no deseamos, es decir:
+
+$$PR_{9}^{3} = 729$$
+
+De esos 729 casos posibles debemos restarle los segundos numeros consecutivos posibles a los números del 1 al 8 (ya que el 9 no tiene consecutivos definidos). Esto nos da un total de $_8C_1 \times _9C_1 = 72$ posibilidades menos.
+
+A partir del caso donde se elija el número 9 entonces también se eliminan 8 posibilidades más (consecutivos del segundo número menos el 9).
+
+Luego se eliminan 7 subcasos (8 posibilidades por cada cifra menos una consecutiva a esa y sin contar el 9) por cada caso posible del 1 al 7. En total siendo 49 casos menos.
+
+Al final queda:
+
+$$729 - 8 - 8 - 49 = 592$$
+
+Se pueden combinar a los números de 592 formas distintas.
+
+\newpage
+
+\bigskip
+
+\Ejercicio{4}{
+    Las placas de matrícula tienen cuatro dígitos numéricos seguidos de dos alfabéticos. ¿Cuántos coches se pueden matricular? Una vez se han agotado, se propone que las matrículas puedan estar formadas por seis dígitos alfanuméricos (es decir, cifras del 0 al 9 o letras de la A a la Z). ¿Cuántas matrículas nuevas se pueden hacer? Una vez agotadas éstas, ¿qué estrategia proporcionaría más matrículas nuevas, hacer matrículas con 7 dígitos, o bien añadir un símbolo al alfabeto?
+}
+
+1. 4 dígitos numéricos (10 posibilidades) y 2 alfabéticos (27 posibilidades):
+
+$$\Rightarrow \quad PR^{4}_{10} \medspace PR^{2}_{27} (10^4)(27^2) = 7,290,000$$
+
+2. 6 dígitos alfanuméricos (37 posibilidades entre 0-9 y A-Z por cada caracter)
+
+$$\Rightarrow \quad PR^{6}_{37} = 37^6 = 2,565,726,409$$
+
+La diferencia entre el antiguo grupo de placas y el nuevo, que contiene elementos iguales a los del antiguo, es:
+
+$$2,565,726,409 - 7,290,000 = 2,558,436,409 \quad \text{placas nuevas}$$
+
+Ahora, si tomásemos 7 dígitos en lugar de 6 ($PR^{7}_{37}$) el resultado sería:
+
+$$PR^{7}_{37} = 37^7 = 94,931,877,133$$
+
+Y si añadieramos un símbolo más al alfabeto, pasando de 37 posibles valores alfanuméricos a 38, esto resultaría en:
+
+$$PR^{6}_{38} = 3,010,936,384$$
+
+$\therefore$ Al agregar un símbolo más a las placas (considerando el segundo caso donde se puede tomar cualquier valor alfanumérico como caracter) se tendrá la mayor cantidad de posibles placas únicas.
+
+---
+
+\newpage
+
+\Ejercicio{5}{
+¿Cuántos números hay entre 100 y 900 que tengan las cifras diferentes? ¿Cuántos números más grandes que 6600 con todas las cifras diferentes y sin ninguna de las cifras 7, 8 ni 9?
+}
+
+1. Considerando como números: $\{x / 123 \leq x \leq 897\}$. Podemos utilizar pares de sets combinatorios para determinar el número total de posibles combinaciones dadas las restricciones, es decir:
+
+\begin{itemize}
+    \item El primer dígito puede estar entre 1 y 8: $_8C_1$
+    \item El segundo dígito puede estar entre 0 y 9 menos el primer dígito: $_9C_1$
+    \item El tercer dígito puede estar entre 0 y 9 menos los 2 primeros dígitos: $_8C_1$
+\end{itemize}
+
+Por lo que el número de combinaciones final posible es: $_8C_1 \times _9C_1 \times _8C_1 = 8 \times 9 \times 8 = 576$
+
+\bigskip
+
+2. Aplicando el mismo concepto que en (1) pero para $\{x / 10234 \leq x \leq 6543210 \}$:
+
+Podemos ver que entre 10234 y 653210 habrán 3 grupos de números, los de 5 cifras, los de 6 cifras y los de 7 cifras. Podemos obtener el número de elementos de cada grupo de la siguiente forma:
+
+\begin{itemize}
+    \item 5 cifras: En la primera cifra podemos elegir una de 6 (sin contar 7, 8, 9 ni 0), en la segunda 6 (7 menos la misma que la cifra anterior) y así hasta la última cifra que puede ser 1 de 3 valores. Esto se puede representar como:
+
+        $$_6C_1 \times _6C_1 \times _5C_1 \times _4C_1 \times _3C_1 = 2160$$
+
+    \item 6 cifras: Partiendo de la idea de la forma en la que calculamos los úmeros de 5 cifras, podemos agregar un "subconjunto" combinatorios más que represente un dígito más, pero con una posibilidad menos, es decir:
+
+        $$_6C_1 \times _6C_1 \times _5C_1 \times _4C_1 \times _3C_1 \times _2C_1= 4320$$
+
+    \item 7 cifras: Para 7 cifras, la fórmula sería entonces:
+
+        $$_6C_1 \times _6C_1 \times _5C_1 \times _4C_1 \times _3C_1 \times _2C_1 \times _1C_1= 4320$$
+\end{itemize}
+
+Finalmente, podemos sumar los resultados de los 3 grupos de cifras para obtener el total de posibilidades:
+
+$$2160 + 4320 + 4320 = 10800$$
+
+$\therefore$ Existen 10800 números más grandes que 6600 que cumplen con las condiciones dadas.
+
+---
+
+\Ejercicio{6}{
+    ¿Cuántas palabras de longitud 4 se pueden formar con las cinco vocales sin que se repita ninguna? ¿Y de longitud 5 (también sin que se repita ninguna)?
+}
+
+Podemos notar que podemos formar permutaciones entre las 5 vocales pero no debemos incluir las repeticiones en cada nueva cifra, lo que puede expresarse como la permutación sin repetición de elementos:
+
+$$_5P_4 = \dfrac{5!}{(5-4)!} = 5! = 120$$
+
+Si repetimos el proceso para 5 de longitud tendríamos:
+
+$$_5P_5 = \dfrac{5!}{(5-5)!} = 5! = 120$$
+
+Tiene sentido que de el mismo resultado pues si analizamos los posibles caminos que se forman en las posibles palabras de 4 de longitud podemos ver que necesariamente al colocar una quinta cifra, como ya no hay más que se puedan elegir, sólo se podrá seguir un único camino.
+
+---
+
+\Ejercicio{7}{
+    Un código de colores con barras usa 6 colores para pintar 4 barras, pero dos barras consecutivas no pueden tener el mismo color. ¿Cuántas palabras diferentes se pueden formar?
+}
+
+Considerando que tenemos un conjunto único de de 6 colores distintos, y queremos tomar 4 de esos colores para formar un conjunto en el que los colores consecutivos no se repitan, podemos notar que necesitamos partir de 6 posibles colores, luego serán solo 5 pues no se puede repetir el anterior. Para el tercer color podemos tomar cualquiera de los 6 colores, igualmente, menos el color del anterior (la restricción solo aplica en barras consecutivas). Entonces tendríamos:
+
+$$_6C_1 \times _5C_1 \times _5C_1 \times _5C_1 = 6(5)(5)(5) = 750$$
+
+Finalmente tenemos 750 posibles combinaciones de colores para las barras.
+
+---
+
+\Ejercicio{8}{
+    En un alfabeto de 10 consonantes y 5 vocales, ¿cuántas palabras de cinco letras sin dos vocales seguidas ni tres consonantes seguidas se pueden formar?
+}
+
+Si tomamos unicamente los órdenes de las palabras de 5 caracteres en lugar de sus valores como tal tenemos las siguientes posibles combinaciones:
+
+\begin{itemize}
+    \item Grupos de 1 consonante a la vez:
+
+        \begin{tabular}{c}
+            $$CVCVC$$ \\
+            $$VCVCV$$ \\
+        \end{tabular}
+
+    \item Grupos de 2 consonantes a la vez:
+
+        \begin{tabular}{c}
+            $$CCVCC$$ \\
+            $$VCCVC$$ \\
+            $$VCVCC$$ \\
+            $$CVCCV$$ \\
+        \end{tabular}
+\end{itemize}
+
+Para cada grupo, el total de combinaciones equivale a pares de permutaciones entre consonantes y vocales, es decir:
+
+\begin{itemize}
+    \item $CVCVC$: $_5P_2 \times _{10}P_3 = 14400$
+    \item $VCVCV$: $_5P_3 \times _{10}P_2 =  5400$
+    \item $CCVCC$: $_5P_1 \times _{10}P_4 = 25200$
+    \item $VCCVC$: $_5P_2 \times _{10}P_3 = 14400$
+    \item $VCVCC$: $_5P_2 \times _{10}P_3 = 14400$
+    \item $CVCCV$: $_5P_2 \times _{10}P_3 = 14400$
+\end{itemize}
+
+El total de probabilidades es entonces 88200, la suma de todas las anteriores.
+
+\Ejercicio{9}{
+    La música serial se basa en el principio de que en cualquier línea melódica han de aparecer los 12 tonos de la escala antes de repetirse alguno. ¿Cuántas líneas melódicas de 12 notas se pueden formar según este principio?
+}
+
+Hasta que no se lleguen a 12 notas no se pueden repetir elementos de la linea melódica, eso quiere decir que necesitamos una permutación que, como el rango de elementos del conjunto final es menor o igual a 12, no puede repetir elementos, es decir:
+
+$$_{12}P_{12} = \dfrac{12!}{0!} = 12! = 479001600$$
+
+
+\Ejercicio{10}{
+    En problemas de diseño de redes de interconexión se suelen usar grafos que tienen por vértices palabras de un alfabeto. Por ejemplo, los llamados grafos de Kautz tienen por vértices las palabras de longitud k que se pueden formar de un alfabeto de n símbolos con la condición que dos letras consecutivas no pueden ser iguales. ¿Cuántas de estas palabras hay?
+}
+
+Si cada nodo del grafo es representado por una letra determinada que no puede repetir la anterior, podemos calcular el total de posibles combinaciones entre todas como:
+
+$$n \times (n-1)(n-1)(n-1)(n-1)..._{k-1 \text{veces}}$$
+
+Donde cada $(n-1)$ es una letra cualquiera menos la anterior. Entonces, el resultado de la operación, para una longitud de "$k$" letras sería:
+
+$$n(n-1)^{k-1}$$
+
+\Ejercicio{11}{
+    Sea $A = \{1, 2, ..., n\}$ y $X = \{x_1, x_2, ..., x_k\}$ un conjunto de k símbolos. Una aplicación $f : X \rightarrow A$ es ordenada si $f(x_1) \leq f (x_2) \leq ... \leq f(x_k)$ y estrictamente ordenada si las desigualdades son estrictas. ¿Cuántas aplicaciones ordenadas y cuántas estrictamente ordenadas hay de $X$ en $A$?
+}
+
+Debido a que cada valor de $f$ que recibe un símbolo determinado va a resultar en uno de los valores de $A$, podemos decir que, para que la cadena de desigualdades se cumpla, se necesita una secuencia de números mayores (o mayores o iguales) entre sí.
+
+Considerando un $i$ tal que $i \in [1; n]$ entonces por cada valor de $i$ que se tome como inicio de la combinación, entonces, para que el resto de elementos cumpla con la desigualdad ordenada se debe tomar:
+
+$$n \times (n - i_1 + 1) \times (n - i_2 + 1) \times ...$$
+
+Y para la estricta:
+
+$$n \times (n - i_1) \times (n - i_2) \times ...$$
+
+Ya que cada $i$ representará un límite de valores, los valores menores que ese $i$ no cumplirán con el orden de las desigualdades.
+
+\Ejercicio{12}{}
+
+Las comisiones diferentes que se pueden formar equivalen al producto de las combinaciones generadas entre los accionistas, los acrededores, los trabajadores y el área de técnico, es decir:
+
+\begin{itemize}
+    \item Accionistas: $_8C_3 = 56$
+    \item Acreedores: $_6C_2 = 15$
+    \item Trabajadores: $_4C_2 = 4$
+    \item Técnico: $_3C_1 = 3$
+\end{itemize}
+
+Ahora multiplicamos todos los casos posibles para hallar el número general de combinaciones:
+
+$$56 \times 15 \times 4 \times 3 = 10080$$
+
+Ahora debemos restarle el número de casos que no se pueden dar:
+
+\begin{itemize}
+    \item Accionistas: $_7C_2 = 21$
+    \item Acreedores: $_6C_2 = 15$
+    \item Trabajadores: $_2C_1 = 2$
+    \item Técnico: $_3C_1 = 3$
+\end{itemize}
+
+$$21 \times 15 \times 2 \times 3 = $$
+
+El total menos los casos no favorables (o que no deberían ocurrir) es ahora:
+
+$$10080 - 1890 = 8190$$
+
+\newpage
+
+\Ejercicio{13}{
+    Una empresa de sondeos escoge una muestra de 20 estudiantes al azar de entre una comunidad de 500 estudiantes para hacer una encuesta. ¿Cuántas muestras diferentes puede obtener? Uno de los estudiantes está encantado de que le pasen la encuesta. ¿Cuántas de estas muestras contienen a este estudiante?
+}
+
+Primero, para obtener grupos aleatorios no ordenados y sin repetir, ya que un solo estudiante no puede pertenecer al mismo grupo 2 veces, podemos aplicar una combinación tal que:
+
+$$_{500}C_{20} = 2.66 \times 10^{35}$$
+
+Si partimos por un alumno en particular tendríamos una forma tal que:
+
+$$1 \times 499 \times 498 \times ... \times 481 = 1 \times \dfrac{499!}{(499-19)!} = \dfrac{499!}{480!} = 1.066 \times 10^{34}$$
+
+Esto debido a que si empezamos por el alumno en sí, y desarrollamos, podemos notar que quedarían 499 posibles alumnos, luego, tras elegir uno, quedarían 498 posibilidades y así sucesivamente.
+
+
+
+
+\medskip
+
+\end{document}
+
