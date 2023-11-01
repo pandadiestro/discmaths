@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>trees_es</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <style>
+  /*
+  Modified to work with pandoc html output
+  David Granström https://davidgranstrom.com
+
+  License MIT © Sindre Sorhus https://sindresorhus.com/
+  */
+  @font-face {
+    font-family: octicons-link;
+    src: url(data:font/woff;charset=utf-8;base64,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) format('woff');
+  }
+
+  body {
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    line-height: 1.5;
+    color: #24292e;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 16px;
+    line-height: 1.5;
+    word-wrap: break-word;
+
+    box-sizing: border-box;
+    min-width: 200px;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 45px;
+  }
+
+  @media (max-width: 767px) {
+    body {
+      padding: 15px;
+    }
+  }
+
+  body .pl-c {
+    color: #6a737d;
+  }
+
+  body .pl-c1,
+  body .pl-s .pl-v {
+    color: #005cc5;
+  }
+
+  body .pl-e,
+  body .pl-en {
+    color: #6f42c1;
+  }
+
+  body .pl-smi,
+  body .pl-s .pl-s1 {
+    color: #24292e;
+  }
+
+  body .pl-ent {
+    color: #22863a;
+  }
+
+  body .pl-k {
+    color: #d73a49;
+  }
+
+  body .pl-s,
+  body .pl-pds,
+  body .pl-s .pl-pse .pl-s1,
+  body .pl-sr,
+  body .pl-sr .pl-cce,
+  body .pl-sr .pl-sre,
+  body .pl-sr .pl-sra {
+    color: #032f62;
+  }
+
+  body .pl-v,
+  body .pl-smw {
+    color: #e36209;
+  }
+
+  body .pl-bu {
+    color: #b31d28;
+  }
+
+  body .pl-ii {
+    color: #fafbfc;
+    background-color: #b31d28;
+  }
+
+  body .pl-c2 {
+    color: #fafbfc;
+    background-color: #d73a49;
+  }
+
+  body .pl-c2::before {
+    content: "^M";
+  }
+
+  body .pl-sr .pl-cce {
+    font-weight: bold;
+    color: #22863a;
+  }
+
+  body .pl-ml {
+    color: #735c0f;
+  }
+
+  body .pl-mh,
+  body .pl-mh .pl-en,
+  body .pl-ms {
+    font-weight: bold;
+    color: #005cc5;
+  }
+
+  body .pl-mi {
+    font-style: italic;
+    color: #24292e;
+  }
+
+  body .pl-mb {
+    font-weight: bold;
+    color: #24292e;
+  }
+
+  body .pl-md {
+    color: #b31d28;
+    background-color: #ffeef0;
+  }
+
+  body .pl-mi1 {
+    color: #22863a;
+    background-color: #f0fff4;
+  }
+
+  body .pl-mc {
+    color: #e36209;
+    background-color: #ffebda;
+  }
+
+  body .pl-mi2 {
+    color: #f6f8fa;
+    background-color: #005cc5;
+  }
+
+  body .pl-mdr {
+    font-weight: bold;
+    color: #6f42c1;
+  }
+
+  body .pl-ba {
+    color: #586069;
+  }
+
+  body .pl-sg {
+    color: #959da5;
+  }
+
+  body .pl-corl {
+    text-decoration: underline;
+    color: #032f62;
+  }
+
+  body .octicon {
+    display: inline-block;
+    vertical-align: text-top;
+    fill: currentColor;
+  }
+
+  body a {
+    background-color: transparent;
+  }
+
+  body a:active,
+  body a:hover {
+    outline-width: 0;
+  }
+
+  body strong {
+    font-weight: inherit;
+  }
+
+  body strong {
+    font-weight: bolder;
+  }
+
+  body h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+  }
+
+  body img {
+    border-style: none;
+  }
+
+  body code,
+  body kbd,
+  body pre {
+    font-family: monospace, monospace;
+    font-size: 1em;
+  }
+
+  body hr {
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
+  }
+
+  body input {
+    font: inherit;
+    margin: 0;
+  }
+
+  body input {
+    overflow: visible;
+  }
+
+  body [type="checkbox"] {
+    box-sizing: border-box;
+    padding: 0;
+  }
+
+  body * {
+    box-sizing: border-box;
+  }
+
+  body input {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+  }
+
+  body a {
+    color: #0366d6;
+    text-decoration: none;
+  }
+
+  body a:hover {
+    text-decoration: underline;
+  }
+
+  body strong {
+    font-weight: 600;
+  }
+
+  body hr {
+    height: 0;
+    margin: 15px 0;
+    overflow: hidden;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid #dfe2e5;
+  }
+
+  body hr::before {
+    display: table;
+    content: "";
+  }
+
+  body hr::after {
+    display: table;
+    clear: both;
+    content: "";
+  }
+
+  body table {
+    border-spacing: 0;
+    border-collapse: collapse;
+  }
+
+  body td,
+  body th {
+    padding: 0;
+  }
+
+  body h1,
+  body h2,
+  body h3,
+  body h4,
+  body h5,
+  body h6 {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  body h1 {
+    font-size: 32px;
+    font-weight: 600;
+  }
+
+  body h2 {
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  body h3 {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  body h4 {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  body h5 {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  body h6 {
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  body p {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+
+  body blockquote {
+    margin: 0;
+  }
+
+  body ul,
+  body ol {
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  body ol ol,
+  body ul ol {
+    list-style-type: lower-roman;
+  }
+
+  body ul ul ol,
+  body ul ol ol,
+  body ol ul ol,
+  body ol ol ol {
+    list-style-type: lower-alpha;
+  }
+
+  body dd {
+    margin-left: 0;
+  }
+
+  body code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 12px;
+  }
+
+  body pre {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 12px;
+  }
+
+  body .octicon {
+    vertical-align: text-bottom;
+  }
+
+  body .pl-0 {
+    padding-left: 0 !important;
+  }
+
+  body .pl-1 {
+    padding-left: 4px !important;
+  }
+
+  body .pl-2 {
+    padding-left: 8px !important;
+  }
+
+  body .pl-3 {
+    padding-left: 16px !important;
+  }
+
+  body .pl-4 {
+    padding-left: 24px !important;
+  }
+
+  body .pl-5 {
+    padding-left: 32px !important;
+  }
+
+  body .pl-6 {
+    padding-left: 40px !important;
+  }
+
+  body::before {
+    display: table;
+    content: "";
+  }
+
+  body::after {
+    display: table;
+    clear: both;
+    content: "";
+  }
+
+  body>*:first-child {
+    margin-top: 0 !important;
+  }
+
+  body>*:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  body a:not([href]) {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  body .anchor {
+    float: left;
+    padding-right: 4px;
+    margin-left: -20px;
+    line-height: 1;
+  }
+
+  body .anchor:focus {
+    outline: none;
+  }
+
+  body p,
+  body blockquote,
+  body ul,
+  body ol,
+  body dl,
+  body table,
+  body pre {
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+
+  body hr {
+    height: 0.25em;
+    padding: 0;
+    margin: 24px 0;
+    background-color: #e1e4e8;
+    border: 0;
+  }
+
+  body blockquote {
+    padding: 0 1em;
+    color: #6a737d;
+    border-left: 0.25em solid #dfe2e5;
+  }
+
+  body blockquote>:first-child {
+    margin-top: 0;
+  }
+
+  body blockquote>:last-child {
+    margin-bottom: 0;
+  }
+
+  body kbd {
+    display: inline-block;
+    padding: 3px 5px;
+    font-size: 11px;
+    line-height: 10px;
+    color: #444d56;
+    vertical-align: middle;
+    background-color: #fafbfc;
+    border: solid 1px #c6cbd1;
+    border-bottom-color: #959da5;
+    border-radius: 3px;
+    box-shadow: inset 0 -1px 0 #959da5;
+  }
+
+  body h1,
+  body h2,
+  body h3,
+  body h4,
+  body h5,
+  body h6 {
+    margin-top: 24px;
+    margin-bottom: 16px;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  body h1 .octicon-link,
+  body h2 .octicon-link,
+  body h3 .octicon-link,
+  body h4 .octicon-link,
+  body h5 .octicon-link,
+  body h6 .octicon-link {
+    color: #1b1f23;
+    vertical-align: middle;
+    visibility: hidden;
+  }
+
+  body h1:hover .anchor,
+  body h2:hover .anchor,
+  body h3:hover .anchor,
+  body h4:hover .anchor,
+  body h5:hover .anchor,
+  body h6:hover .anchor {
+    text-decoration: none;
+  }
+
+  body h1:hover .anchor .octicon-link,
+  body h2:hover .anchor .octicon-link,
+  body h3:hover .anchor .octicon-link,
+  body h4:hover .anchor .octicon-link,
+  body h5:hover .anchor .octicon-link,
+  body h6:hover .anchor .octicon-link {
+    visibility: visible;
+  }
+
+  body h1 {
+    padding-bottom: 0.3em;
+    font-size: 2em;
+    border-bottom: 1px solid #eaecef;
+  }
+
+  body h2 {
+    padding-bottom: 0.3em;
+    font-size: 1.5em;
+    border-bottom: 1px solid #eaecef;
+  }
+
+  body h3 {
+    font-size: 1.25em;
+  }
+
+  body h4 {
+    font-size: 1em;
+  }
+
+  body h5 {
+    font-size: 0.875em;
+  }
+
+  body h6 {
+    font-size: 0.85em;
+    color: #6a737d;
+  }
+
+  body ul,
+  body ol {
+    padding-left: 2em;
+  }
+
+  body ul ul,
+  body ul ol,
+  body ol ol,
+  body ol ul {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  body li {
+    word-wrap: break-all;
+  }
+
+  body li>p {
+    margin-top: 16px;
+  }
+
+  body li+li {
+    margin-top: 0.25em;
+  }
+
+  body dl {
+    padding: 0;
+  }
+
+  body dl dt {
+    padding: 0;
+    margin-top: 16px;
+    font-size: 1em;
+    font-style: italic;
+    font-weight: 600;
+  }
+
+  body dl dd {
+    padding: 0 16px;
+    margin-bottom: 16px;
+  }
+
+  body table {
+    display: block;
+    width: 100%;
+    overflow: auto;
+  }
+
+  body table th {
+    font-weight: 600;
+  }
+
+  body table th,
+  body table td {
+    padding: 6px 13px;
+    border: 1px solid #dfe2e5;
+  }
+
+  body table tr {
+    background-color: #fff;
+    border-top: 1px solid #c6cbd1;
+  }
+
+  body table tr:nth-child(2n) {
+    background-color: #f6f8fa;
+  }
+
+  body img {
+    max-width: 100%;
+    box-sizing: content-box;
+  }
+
+  body img[align=right] {
+    padding-left: 20px;
+  }
+
+  body img[align=left] {
+    padding-right: 20px;
+  }
+
+  body code {
+    padding: 0.2em 0.4em;
+    margin: 0;
+    font-size: 85%;
+    background-color: rgba(27,31,35,0.05);
+    border-radius: 3px;
+  }
+
+  body pre {
+    word-wrap: normal;
+  }
+
+  body pre>code {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    word-break: normal;
+    white-space: pre;
+    background: transparent;
+    border: 0;
+  }
+
+  body .highlight {
+    margin-bottom: 16px;
+  }
+
+  body .highlight pre {
+    margin-bottom: 0;
+    word-break: normal;
+  }
+
+  body .highlight pre,
+  body pre {
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f6f8fa;
+    border-radius: 3px;
+  }
+
+  body pre code {
+    display: inline;
+    max-width: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+  }
+
+  body .full-commit .btn-outline:not(:disabled):hover {
+    color: #005cc5;
+    border-color: #005cc5;
+  }
+
+  body kbd {
+    display: inline-block;
+    padding: 3px 5px;
+    font: 11px "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    line-height: 10px;
+    color: #444d56;
+    vertical-align: middle;
+    background-color: #fafbfc;
+    border: solid 1px #d1d5da;
+    border-bottom-color: #c6cbd1;
+    border-radius: 3px;
+    box-shadow: inset 0 -1px 0 #c6cbd1;
+  }
+
+  body :checked+.radio-label {
+    position: relative;
+    z-index: 1;
+    border-color: #0366d6;
+  }
+
+  body .task-list-item {
+    list-style-type: none;
+  }
+
+  body .task-list-item+.task-list-item {
+    margin-top: 3px;
+  }
+
+  body .task-list-item input {
+    margin: 0 0.2em 0.25em -1.6em;
+    vertical-align: middle;
+  }
+
+  body hr {
+    border-bottom-color: #eee;
+  }
+  </style>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" />
+</head>
+<body>
+<h1 id="trees-árboles">Trees (árboles)</h1>
+<h2 id="ejercicio-1">Ejercicio 1</h2>
+<p>Sea <span class="math inline">A=\{ v_1, v_2, v_3, v_4, v_5, v_6, v_7,
+v_8, v_9, v_{10} \}</span> el conjunto de todos los vértices de un grafo
+T tal que:</p>
+<p><span class="math display">T = \{(v2, v3 ), (v2, v1 ), (v4, v5 ),
+(v4, v6 ), (v5, v8 ), (v6, v7 ), (v4, v2 ), (v7, v9 ), (v7,
+v10)\}</span></p>
+<p><strong>Se pide</strong></p>
+<p>Mostrar que <span class="math inline">T</span> es un árbol, además de
+su raíz, altura, hojas y tipo de n-árbol que es.</p>
+<p><strong>Resolución</strong></p>
+<p>Se puede notar, primero que nada, que el set <span
+class="math inline">T</span> es un set de pares ordenados, esto quiere
+decir que, para un par de vértices de <span class="math inline">T</span>
+cualquiera (tómese <span class="math inline">(a, b)</span>), entonces
+<span class="math inline">(a, b)</span> no necesariamente es igual a
+<span class="math inline">(b, a)</span>.</p>
+<p>Esto quiere decir que estamos ante un árbol dirigido <span
+class="math inline">T</span> que se ve así:</p>
+<div style="text-align: center;">
+<p><img style="width:80%; box-shadow: 5px 5px 5px gray;" src="../media/graphs/tree.png"/></p>
+</div>
+<p>Podemos decir que es un árbol puesto que cumple con:</p>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" checked="" />
+Es un grafo no cíclico (bipartito)</li>
+<li><input type="checkbox" disabled="" checked="" />
+Para 3 vértices cualesquiera que tomemos, sólo existe 1 camino posible
+para viajar del primero al último.</li>
+<li><input type="checkbox" disabled="" checked="" />
+Existen 10 vértices y 9 aristas.</li>
+</ul>
+<p>El nodo raíz del 3-árbol es <span class="math inline">v_4</span>, su
+altura es 3. Además, sus hojas son el conjunto <span
+class="math inline">A</span> tal que:</p>
+<p><span class="math display">A = \{ v_3, v_1, v_8, v_9, v_{10}
+\}</span></p>
+<h2 id="ejercicio-2">Ejercicio 2</h2>
+<p>Dado el árbol <span class="math inline">T</span> tal que:</p>
+<p><span class="math display">T = \{ (B, C), (F, E), (F, I), (F, M), (A,
+G), (A, H), (C, J), (D, B), (D, F), (B, A), (I, K), (I, L), (M, O), (M,
+P), (P, Q) \}</span></p>
+<p><strong>Se pide</strong></p>
+<ul>
+<li>Trace el dígrafo del árbol <span class="math inline">T</span>
+ordenado, indicando la raíz y el tipo de n-árbol.</li>
+<li>Trace el dígrafo del árbol binario posicional <span
+class="math inline">B(T)</span> formado a partir del árbol <span
+class="math inline">T</span> ordenado.</li>
+<li>Verifique que el contenido de los arreglos <em>LEFT</em>,
+<em>DATA</em> y <em>RIGHT</em> es:</li>
+</ul>
+<div style="text-align: center;">
+<p><img style="width:40%; box-shadow: 5px 5px 5px gray;" src="../media/graphs/tabled_exercise_1.png"/></p>
+</div>
+<p><strong>Resolución</strong></p>
+<p>El 3-árbol dirigido <span class="math inline">T</span> de raíz <span
+class="math inline">D</span> se ve así:</p>
+<div style="text-align: center;">
+<p><img style="width:80%; box-shadow: 5px 5px 5px gray;" src="../media/graphs/tree_2.png"/></p>
+</div>
+<p>Para armar el árbol binario posicional del dígrafo podemos empezar
+por conectar entre sí los nodos hijos de cada hoja con hijos.</p>
+<div style="text-align: center;">
+<p><img style="width:80%; box-shadow: 5px 5px 5px gray;" src="../media/graphs/tree_4.png"/></p>
+</div>
+<p>Luego para cada uno de los nodos padres, dejaremos solamente la
+arista que esté más a la izquierda de todas. De esta forma, el árbol
+binario posicional del dígrafo resulta:</p>
+<table>
+<tr>
+<td style="width: 60%;">
+<img style="box-shadow: 5px 5px 5px gray;" src="../media/graphs/tree_3.png"/>
+</td>
+<td style="width: 200%;">
+<img style="box-shadow: 5px 5px 5px gray;" src="../media/graphs/tabla_1.png"/>
+</td>
+</tr>
+</table>
+<h2 id="ejercicio-3">Ejercicio 3</h2>
+<p>Dado el árbol <span class="math inline">T</span> cuyos elementos
+son:</p>
+<p><span class="math display">T = \{ (a, l), (b, c), (c, a), (c, e), (c,
+f), (d, h), (d, i), (f, m), (i, j), (i, k), (i, n), (h, g), (i, p)
+\}</span></p>
+<p><strong>Se pide</strong></p>
+<ul>
+<li>Trazar el dígrafo del árbol <span class="math inline">T</span>
+ordenado, indicando la raíz y el tipo de n - árbol.</li>
+<li>Trazar el dígrafo del árbol binario etiquetado <span
+class="math inline">B(T)</span> formado a partir del árbol <span
+class="math inline">T</span> ordenado.</li>
+<li>Determinar el contenido de los arreglos <em>LEFT</em>, <em>DATA</em>
+y <em>RIGHT</em>.</li>
+</ul>
+<p><strong>Resolución</strong></p>
+<p>Siguiendo el set de pares del 4-árbol <span
+class="math inline">T</span> de raíz <span class="math inline">b</span>,
+el dígrafo resulta ser:</p>
+<div style="text-align: center;">
+<p><img style="width:80%; box-shadow: 5px 5px 5px gray;" src="../media/graphs/tree_5.png"/></p>
+</div>
+<p>Y siguiendo el mecanismo anterior, esta sería su representación
+binaria y su, subsecuente, arreglo:</p>
+<table>
+<tr>
+<td style="width: 50%;">
+<img style="box-shadow: 5px 5px 5px gray;" src="../media/graphs/tree_6.png"/>
+</td>
+<td style="width: 200%;">
+<img style="box-shadow: 5px 5px 5px gray;" src="../media/graphs/tabla_2.png"/>
+</td>
+</tr>
+</table>
+<h2 id="ejercicio-4">Ejercicio 4</h2>
+<p>Dado el arreglo <em>LEFT</em>, <em>DATA</em>, <em>RIGHT</em>:</p>
+<div style="text-align: center;">
+<p><img style="width:40%; box-shadow: 5px 5px 5px gray;" src="../media/graphs/tabla_3.png"/></p>
+</div>
+<p><strong>Se pide</strong></p>
+<ul>
+<li>Trazar el dígrafo del árbol binario posicional <span
+class="math inline">B(T)</span> relacionado al arreglo.</li>
+<li>Trazar el dígrafo del árbol <span class="math inline">T</span>
+original ordenado, indicando la raíz y el tipo de n-árbol.</li>
+</ul>
+<p><strong>Resolución</strong></p>
+<p>Siguiendo el arreglo, el dígrafo <span
+class="math inline">B(T)</span> se ve así:</p>
+<div style="text-align: center;">
+<p><img style="width:60%; box-shadow: 5px 5px 5px gray;" src="../media/graphs/tree_7.png"/></p>
+</div>
+<p>Si tomamos las conexiones rojas como las uniones extra que se
+explicaron en ejercicios anteriores, podemos tomarlas también como
+indicador de agrupamiento, formando así el 3-árbol <span
+class="math inline">T</span> de raíz <span class="math inline">F</span>
+que se ve así:</p>
+<div style="text-align: center;">
+<p><img style="width:60%; box-shadow: 5px 5px 5px gray;" src="../media/graphs/tree_8.png"/></p>
+</div>
+<h2 id="ejercicio-5">Ejercicio 5</h2>
+<p>Dado el árbol <span class="math inline">T</span>:</p>
+<p><span class="math display">T = \{ (1, 12), (2, 3), (2, 4), (3, 1),
+(3, 5), (3, 6), (4, 8), (4, 9), (6, 13), (9, 10), (9, 11), (9, 14), (8,
+7), (9, 15) \}</span></p>
+<p><strong>Se pide</strong></p>
+<ul>
+<li>Trazar el dígrafo del árbol <span class="math inline">T</span>
+ordenado, indicando la raíz y el tipo de n - árbol.</li>
+<li>Trazar el dígrafo del árbol binario etiquetado <span
+class="math inline">B(T)</span> formado a partir del árbol <span
+class="math inline">T</span> ordenado.</li>
+<li>Determinar el contenido de los arreglos <em>LEFT</em>, <em>DATA</em>
+y <em>RIGHT</em>.</li>
+</ul>
+<p><strong>Resolución</strong></p>
+<p>Traspasando el conjunto de pares de vértices, el 4-árbol <span
+class="math inline">T</span> con raíz <span class="math inline">2</span>
+queda así:</p>
+<div style="text-align: center;">
+<p><img style="width:70%; box-shadow: 5px 5px 5px gray;" src="../media/graphs/tree_9.png"/></p>
+</div>
+<p>Mientras que su representación binaria <span
+class="math inline">B(T)</span> queda así:</p>
+<table>
+<tr>
+<td style="width: 60%;">
+<img style="box-shadow: 5px 5px 5px gray;" src="../media/graphs/tree_10.png"/>
+</td>
+<td style="width: 200%;">
+<img style="box-shadow: 5px 5px 5px gray;" src="../media/graphs/tabla_4.png"/>
+</td>
+</tr>
+</table>
+<h2 id="ejercicio-6">Ejercicio 6</h2>
+<p>Dado el árbol <span class="math inline">T</span>:</p>
+<p><span class="math display">T = \{ (E, B), (E, C), (E, F), (B, A), (B,
+G), (C, K), (F, H), (F, I), (F, J), (A, L), (H, M) \}</span></p>
+<p><strong>Se pide</strong></p>
+<ul>
+<li>Trazar el dígrafo del árbol <span class="math inline">T</span>
+ordenado, indicando la raíz y el tipo de n - árbol.</li>
+<li>Trazar el dígrafo del árbol binario etiquetado <span
+class="math inline">B(T)</span> formado a partir del árbol <span
+class="math inline">T</span> ordenado.</li>
+<li>Determinar el contenido de los arreglos <em>LEFT</em>, <em>DATA</em>
+y <em>RIGHT</em>.</li>
+</ul>
+<p><strong>Resolución</strong></p>
+<p>Traspasando el conjunto de pares de vértices, el 4-árbol <span
+class="math inline">T</span> con raíz <span class="math inline">2</span>
+queda así:</p>
+<div style="text-align: center;">
+<p><img style="width:70%; box-shadow: 5px 5px 5px gray;" src="../media/graphs/tree_12.png"/></p>
+</div>
+<p>Mientras que su representación binaria <span
+class="math inline">B(T)</span> queda así:</p>
+<table>
+<tr>
+<td style="width: 60%;">
+<img style="box-shadow: 5px 5px 5px gray;" src="../media/graphs/tree_11.png"/>
+</td>
+<td style="width: 200%;">
+<img style="box-shadow: 5px 5px 5px gray;" src="../media/graphs/tabla_5.png"/>
+</td>
+</tr>
+</table>
+</body>
+</html>
