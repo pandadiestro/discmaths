@@ -98,10 +98,10 @@ Y siguiendo el mecanismo anterior, esta sería su representación binaria y su, 
 
 <table>
 <tr>
-<td style="width: 50%;">
+<td style="width: 60%;">
 <img style="box-shadow: 5px 5px 5px gray;" src="../../media/graphs/tree_6.png"/>
 </td>
-<td style="width: 200%;">
+<td style="width: 300%;">
 <img style="box-shadow: 5px 5px 5px gray;" src="../../media/graphs/tabla_2.png"/>
 </td>
 </tr>
